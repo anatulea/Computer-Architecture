@@ -7,10 +7,11 @@ class CPU:
 
     def __init__(self):
         """Construct a new CPU."""
-        self.ram = [0]*256
-        self.reg = [0]*8
-        self.pc = 0
+        self.ram = [0]*256 # memory
+        self.reg = [0]*8 # register
+        self.pc = 0 # program count
         self.halted = False
+        self.sp = 7 
 
     def load(self):
         """Load a program into memory."""
@@ -29,10 +30,10 @@ class CPU:
         #     0b00000001, # HLT
         # ]
 
-        for instruction in self.ram:
-            self.ram[address] = instruction
-            # print(instruction)
-            address += 1
+        # for instruction in self.ram:
+        #     self.ram[address] = instruction
+        #     # print(instruction)
+        #     address += 1
 
         try:
             if len(sys.argv)<2:
@@ -46,7 +47,6 @@ class CPU:
                     stripped_split_line =  split_line.strip()
                     if stripped_split_line != "":
                         command =  int(stripped_split_line, 2)
-                        print(address)
                         self.ram[address]= command
                         address +=1
         except FileNotFoundError:
