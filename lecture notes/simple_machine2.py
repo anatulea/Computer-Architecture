@@ -186,7 +186,9 @@ while running:
     number_of_operands = command >> 6
 
     # bit shift and mask to isolate the 'C' bit
-    sets_pc_directly = ((command >> 4) & 0b001) == 0b001
+    sets_pc_directly = ((command >> 4) & 0b001) == 0b0001
+
+    is_alu_operation = ((command >> 5) & 0b001) == 1
 
     if not sets_pc_directly:
         pc += (1 + number_of_operands)
